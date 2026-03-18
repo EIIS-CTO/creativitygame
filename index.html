@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creativity Game</title>
+    <title>Creativity Game | Scopri il tuo potenziale</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
     <!-- Libreria per l'effetto coriandoli aggiornata (v1.9.2 supporta le immagini) -->
@@ -68,61 +68,61 @@
 </head>
 <body class="flex items-center justify-center p-4 selection:bg-fuchsia-200 selection:text-fuchsia-900">
 
-    <main class="glass-card rounded-3xl p-8 md:p-12 w-full max-w-3xl flex flex-col relative max-h-[95vh] overflow-y-auto">
+    <main class="glass-card rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-12 w-full max-w-3xl flex flex-col relative max-h-[95vh] overflow-y-auto">
         
         <!-- ================= FASE 1: INTRO ================= -->
         <div id="view-intro" class="view active flex-col w-full">
             
-            <div class="text-center mb-8">
-                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">
+            <div class="text-center mb-8 mt-2">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">
                     Sei nel <span class="gradient-text">2%</span> dei Geni Creativi?
                 </h1>
-                <p class="text-slate-500 text-lg">Un test di pensiero divergente per risvegliare l'immaginazione.</p>
+                <p class="text-slate-500 text-base sm:text-lg">Un test di pensiero divergente per risvegliare l'immaginazione.</p>
             </div>
 
             <!-- Box Esperimento NASA -->
-            <div class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-6 md:p-8 mb-8 border border-indigo-100 shadow-sm relative overflow-hidden">
-                <div class="absolute -top-4 -right-4 text-9xl opacity-5">🚀</div>
+            <div class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-5 sm:p-6 md:p-8 mb-8 border border-indigo-100 shadow-sm relative overflow-hidden">
+                <div class="absolute -top-4 -right-4 text-7xl md:text-9xl opacity-5 pointer-events-none">🚀</div>
                 
-                <p class="text-slate-700 leading-relaxed mb-6 relative z-10">
+                <p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4 sm:mb-6 relative z-10">
                     Nel 1968, la <strong>NASA</strong> commissionò ai ricercatori Dr. George Land e Beth Jarman lo sviluppo di un test per identificare ingegneri capaci di "pensiero divergente". Il test misurava l'abilità di trovare molteplici soluzioni non convenzionali a un problema.
                 </p>
-                <p class="text-slate-700 leading-relaxed mb-6 relative z-10">
+                <p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-6 relative z-10">
                     Successivamente, in una ricerca indipendente, Land e Jarman applicarono la stessa metodologia a 1.600 bambini. Secondo i dati divulgati dagli autori, a 5 anni il <strong>98%</strong> raggiungeva il livello di "genio creativo". Ripetendo il test nel tempo, le percentuali crollavano drasticamente: un declino che essi imputarono all'educazione tradizionale e al conformismo sociale.
                 </p>
 
-                <div class="grid grid-cols-3 gap-4 text-center border-t border-indigo-200 pt-6 relative z-10">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-4 text-center border-t border-indigo-200 pt-6 relative z-10">
                     <div>
-                        <span class="block text-3xl md:text-4xl font-black text-indigo-600">98%</span>
+                        <span class="block text-3xl sm:text-3xl md:text-4xl font-black text-indigo-600">98%</span>
                         <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider mt-1 block">A 5 Anni</span>
                     </div>
                     <div>
-                        <span class="block text-3xl md:text-4xl font-black text-slate-400">12%</span>
+                        <span class="block text-3xl sm:text-3xl md:text-4xl font-black text-slate-400">12%</span>
                         <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider mt-1 block">A 15 Anni</span>
                     </div>
                     <div>
-                        <span class="block text-3xl md:text-4xl font-black text-rose-500">2%</span>
+                        <span class="block text-3xl sm:text-3xl md:text-4xl font-black text-rose-500">2%</span>
                         <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider mt-1 block">Adulti</span>
                     </div>
                 </div>
             </div>
 
             <div class="text-center mb-8">
-                <h3 class="font-bold text-slate-800 text-xl mb-2">Come funziona</h3>
-                <p class="text-slate-600">Il sistema selezionerà un oggetto comune, come una graffetta o un mattone. Avrai <strong class="text-indigo-600">90 secondi</strong> per inserire fino a <strong class="text-indigo-600">10 utilizzi alternativi</strong>, strani, folli o geniali per quell'oggetto.</p>
+                <h3 class="font-bold text-slate-800 text-lg sm:text-xl mb-2">Come funziona</h3>
+                <p class="text-slate-600 text-sm sm:text-base">Il sistema selezionerà un oggetto comune, come una graffetta o un mattone. Avrai <strong class="text-indigo-600">90 secondi</strong> per inserire fino a <strong class="text-indigo-600">10 utilizzi alternativi</strong>, strani, folli o geniali per quell'oggetto.</p>
             </div>
 
-            <button onclick="startSpinner()" class="w-full md:w-auto md:mx-auto px-10 py-4 bg-slate-900 text-white font-bold rounded-full shadow-lg shadow-slate-900/20 hover:bg-indigo-600 hover:shadow-indigo-600/30 hover:-translate-y-1 transition-all duration-300 text-lg">
+            <button onclick="startSpinner()" class="w-full md:w-auto md:mx-auto px-8 sm:px-10 py-4 bg-slate-900 text-white font-bold rounded-xl sm:rounded-full shadow-lg shadow-slate-900/20 hover:bg-indigo-600 hover:shadow-indigo-600/30 hover:-translate-y-1 transition-all duration-300 text-base sm:text-lg">
                 Inizia la Sfida Creativa
             </button>
         </div>
 
         <!-- ================= FASE 1.5: SPINNER ================= -->
-        <div id="view-spinner" class="view flex-col items-center justify-center w-full py-16">
-            <h2 class="text-2xl font-semibold text-slate-600 mb-8">Estrazione dell'oggetto in corso...</h2>
+        <div id="view-spinner" class="view flex-col items-center justify-center w-full py-10 sm:py-16">
+            <h2 class="text-xl sm:text-2xl font-semibold text-slate-600 mb-8 text-center">Estrazione dell'oggetto in corso...</h2>
             
-            <div class="relative h-40 w-full max-w-md mx-auto overflow-hidden bg-white/60 rounded-2xl border border-slate-200 shadow-inner">
-                <div class="absolute top-1/2 left-0 w-full h-24 -mt-12 border-y-2 border-indigo-400/50 bg-indigo-50/40 z-0 pointer-events-none"></div>
+            <div class="relative h-32 sm:h-40 w-full max-w-md mx-auto overflow-hidden bg-white/60 rounded-2xl border border-slate-200 shadow-inner">
+                <div class="absolute top-1/2 left-0 w-full h-20 sm:h-24 -mt-10 sm:-mt-12 border-y-2 border-indigo-400/50 bg-indigo-50/40 z-0 pointer-events-none"></div>
                 <div id="spinnerReel" class="flex flex-col items-center w-full absolute top-0 z-10 will-change-transform"></div>
                 <div class="absolute inset-0 pointer-events-none shadow-[inset_0_30px_20px_-15px_rgba(255,255,255,1),inset_0_-30px_20px_-15px_rgba(255,255,255,1)] z-20"></div>
             </div>
@@ -131,69 +131,71 @@
         <!-- ================= FASE 2: THE GAME ================= -->
         <div id="view-game" class="view flex-col w-full hidden">
             
-            <div class="flex flex-col md:flex-row justify-between items-center bg-slate-50 rounded-2xl p-6 mb-6 border border-slate-100">
-                <div class="flex items-center gap-4 mb-4 md:mb-0">
-                    <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center text-4xl" id="gameEmoji">🧱</div>
+            <div class="flex flex-col sm:flex-row justify-between items-center bg-slate-50 rounded-2xl p-4 sm:p-6 mb-5 sm:mb-6 border border-slate-100 text-center sm:text-left">
+                <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mb-4 sm:mb-0">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center text-3xl sm:text-4xl" id="gameEmoji">🧱</div>
                     <div>
-                        <div class="text-sm font-semibold text-slate-400 uppercase tracking-wider">Cosa ci faresti con...</div>
-                        <div class="text-3xl font-extrabold text-slate-800" id="gameObjectName">Un Mattone</div>
+                        <div class="text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wider">Cosa ci faresti con...</div>
+                        <div class="text-2xl sm:text-3xl font-extrabold text-slate-800" id="gameObjectName">Un Mattone</div>
                     </div>
                 </div>
-                <div class="bg-indigo-50 text-indigo-700 px-6 py-3 rounded-full font-bold flex items-center gap-3">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    <span class="text-2xl tabular-nums" id="timerDisplay">90</span> <span class="text-sm">sec</span>
+                <div class="bg-indigo-50 text-indigo-700 px-5 py-2 sm:px-6 sm:py-3 rounded-full font-bold flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-center">
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span class="text-xl sm:text-2xl tabular-nums" id="timerDisplay">90</span> <span class="text-xs sm:text-sm">sec</span>
                 </div>
             </div>
             
-            <div class="w-full relative flex gap-3 mb-6">
+            <div class="w-full relative flex flex-col sm:flex-row gap-3 mb-5 sm:mb-6">
+                <!-- Su iOS Safari, font size minore di 16px causa autozoom. text-base è 16px -->
                 <input type="text" id="ideaInput" maxlength="140" autocomplete="off"
-                       class="flex-1 bg-white border-2 border-slate-200 focus:border-indigo-400 rounded-xl py-4 px-6 text-lg text-slate-700 transition-all placeholder:text-slate-300 shadow-sm"
+                       class="w-full sm:flex-1 bg-white border-2 border-slate-200 focus:border-indigo-400 rounded-xl py-3 px-5 sm:py-4 sm:px-6 text-base sm:text-lg text-slate-700 transition-all placeholder:text-slate-300 shadow-sm"
                        placeholder="Scrivi un'idea e premi Invio..." onkeypress="handleKeyPress(event)">
-                <button onclick="addIdea()" class="bg-indigo-600 text-white font-bold px-8 py-4 rounded-xl shadow-md hover:bg-indigo-700 hover:shadow-lg transition-all">
+                <button onclick="addIdea()" class="w-full sm:w-auto bg-indigo-600 text-white font-bold px-6 py-3 sm:px-8 sm:py-4 rounded-xl shadow-md hover:bg-indigo-700 hover:shadow-lg transition-all text-base sm:text-lg">
                     Aggiungi
                 </button>
             </div>
             
-            <div class="w-full flex-1 bg-white border border-slate-100 shadow-inner rounded-xl p-6 h-64 overflow-y-auto ideas-container mb-6">
+            <div class="w-full flex-1 bg-white border border-slate-100 shadow-inner rounded-xl p-4 sm:p-6 h-56 sm:h-64 overflow-y-auto ideas-container mb-5 sm:mb-6">
                 <div class="flex justify-between items-center mb-4 border-b border-slate-100 pb-2">
-                    <span class="font-bold text-slate-700">Le tue idee</span>
-                    <span id="ideaCount" class="font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full text-sm">0 / 10</span>
+                    <span class="font-bold text-slate-700 text-sm sm:text-base">Le tue idee</span>
+                    <span id="ideaCount" class="font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full text-xs sm:text-sm">0 / 10</span>
                 </div>
-                <ul id="ideasList" class="space-y-3 text-slate-600">
-                    <li id="emptyStateMsg" class="text-slate-400 italic text-center mt-10">L'immaginazione è la tua unica arma. Inizia a scrivere!</li>
+                <ul id="ideasList" class="space-y-2 sm:space-y-3 text-sm sm:text-base text-slate-600">
+                    <li id="emptyStateMsg" class="text-slate-400 italic text-center mt-6 sm:mt-10">L'immaginazione è la tua unica arma. Inizia a scrivere!</li>
                 </ul>
             </div>
             
-            <div class="flex justify-between items-center">
-                <p class="text-sm text-slate-500">Punta alla quantità, non giudicare le tue idee!</p>
+            <div class="flex flex-col-reverse sm:flex-row justify-between items-center gap-3">
+                <p class="text-xs sm:text-sm text-slate-500 text-center sm:text-left">Punta alla quantità, non giudicare le tue idee!</p>
                 <button id="submitBtn" onclick="finishGameEarly()" 
-                        class="text-slate-500 hover:text-slate-800 font-semibold px-4 py-2 transition-colors">
+                        class="w-full sm:w-auto bg-slate-100 sm:bg-transparent text-slate-600 hover:text-slate-800 hover:bg-slate-200 sm:hover:bg-transparent font-semibold px-4 py-2 rounded-lg sm:rounded-none transition-colors text-sm sm:text-base">
                     Ho finito prima
                 </button>
             </div>
         </div>
 
         <!-- ================= FASE 2.5: EASTER EGG ================= -->
-        <div id="view-easter-egg" class="view flex-col items-center justify-center text-center w-full hidden py-10">
-            <div class="text-8xl mb-6 animate-bounce drop-shadow-lg">🐇</div>
-            <h2 class="text-3xl md:text-4xl font-extrabold text-indigo-600 mb-4">Hai scoperto il Bianconiglio!</h2>
-            <p class="text-slate-600 text-lg max-w-md mb-8 leading-relaxed">
+        <div id="view-easter-egg" class="view flex-col items-center justify-center text-center w-full hidden py-8 sm:py-10">
+            <div class="text-6xl sm:text-8xl mb-6 animate-bounce drop-shadow-lg">🐇</div>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-indigo-600 mb-4">Hai scoperto il Bianconiglio!</h2>
+            <p class="text-slate-600 text-base sm:text-lg max-w-md mb-8 leading-relaxed">
                 Hai sbloccato l'easter egg segreto del gioco. La tua curiosità e il tuo pensiero divergente sono stati registrati a sistema. Ora scendiamo nella tana...
             </p>
-            <button onclick="resumeGame()" class="px-8 py-4 bg-indigo-600 text-white font-bold rounded-xl shadow-lg hover:bg-indigo-700 hover:-translate-y-1 transition-all duration-300 text-lg">
+            <button onclick="resumeGame()" class="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-indigo-600 text-white font-bold rounded-xl shadow-lg hover:bg-indigo-700 hover:-translate-y-1 transition-all duration-300 text-base sm:text-lg">
                 Riprendi il timer e torna alla Sfida
             </button>
         </div>
 
         <!-- ================= FASE 3: LEAD GEN ================= -->
         <div id="view-lead" class="view flex-col items-center text-center w-full hidden py-4">
-            <div class="w-14 h-14 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-2xl mb-3 shadow-inner" id="leadIcon">💡</div>
-            <h2 class="text-2xl font-extrabold text-slate-800 mb-2" id="leadTitle">Tempo scaduto!</h2>
-            <p class="text-slate-600 text-base mb-5 max-w-lg">
-                Hai registrato <strong class="text-indigo-600 text-xl mx-1" id="finalCountMsg">0</strong> idee. Lascia la tua email per ricevere l'analisi aggregata.
+            <div class="w-12 h-12 sm:w-14 sm:h-14 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-xl sm:text-2xl mb-3 shadow-inner" id="leadIcon">💡</div>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-800 mb-2" id="leadTitle">Tempo scaduto!</h2>
+            <p class="text-slate-600 text-sm sm:text-base mb-5 max-w-lg px-2">
+                Hai registrato <strong class="text-indigo-600 text-lg sm:text-xl mx-1" id="finalCountMsg">0</strong> idee. Lascia la tua email per ricevere l'analisi aggregata.
             </p>
             
             <div class="w-full max-w-md relative mb-4">
+                <!-- text-base previene lo zoom su iOS -->
                 <input type="email" id="emailInput" required autocomplete="email"
                        class="w-full bg-white border-2 border-slate-200 rounded-xl py-3 px-5 text-base text-center text-slate-800 transition-all focus:border-indigo-400 focus:ring-4 focus:ring-indigo-50 shadow-sm"
                        placeholder="nome.cognome@azienda.it">
@@ -201,9 +203,10 @@
 
             <!-- Campo per suggerire un nuovo oggetto -->
             <div class="w-full max-w-md relative mb-5 text-left">
-                <label for="suggestObjectInput" class="block text-xs font-semibold text-slate-500 mb-1">Suggerisci un oggetto per il futuro (Opzionale)</label>
+                <label for="suggestObjectInput" class="block text-xs font-semibold text-slate-500 mb-1 ml-1">Suggerisci un oggetto per il futuro (Opzionale)</label>
+                <!-- text-base per prevenire autozoom mobile -->
                 <input type="text" id="suggestObjectInput" oninput="checkEasterEggInSuggestion(event)"
-                       class="w-full bg-white border-2 border-slate-200 rounded-xl py-2 px-4 text-sm text-slate-700 transition-all focus:border-indigo-400 focus:ring-4 focus:ring-indigo-50 shadow-sm"
+                       class="w-full bg-white border-2 border-slate-200 rounded-xl py-3 px-5 text-base text-slate-700 transition-all focus:border-indigo-400 focus:ring-4 focus:ring-indigo-50 shadow-sm"
                        placeholder="es. Un imbuto, una gruccia...">
             </div>
             
@@ -212,52 +215,52 @@
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle>
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                <span class="font-medium text-xs">Salvataggio in corso...</span>
+                <span class="font-medium text-xs sm:text-sm">Salvataggio in corso...</span>
             </div>
             
             <div class="w-full max-w-md flex flex-col gap-3">
                 <button id="sendDataBtn" onclick="sendData()" 
-                        class="w-full px-6 py-3 bg-slate-900 text-white font-bold rounded-xl shadow-lg hover:bg-indigo-600 hover:-translate-y-1 transition-all duration-300 text-base">
+                        class="w-full px-6 py-3 bg-slate-900 text-white font-bold rounded-xl shadow-lg hover:bg-indigo-600 hover:-translate-y-1 transition-all duration-300 text-sm sm:text-base">
                     Invia e Scopri i Risultati
                 </button>
 
                 <button id="skipEmailBtn" onclick="sendData(true)" 
-                        class="w-full px-4 py-3 bg-white border-2 border-slate-200 text-slate-600 font-bold rounded-xl shadow-sm hover:bg-slate-50 hover:border-indigo-200 hover:text-indigo-600 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 text-base group">
-                    <span class="text-xl group-hover:scale-110 transition-transform duration-300">🎭</span>
+                        class="w-full px-4 py-3 bg-white border-2 border-slate-200 text-slate-600 font-bold rounded-xl shadow-sm hover:bg-slate-50 hover:border-indigo-200 hover:text-indigo-600 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 text-sm sm:text-base group">
+                    <span class="text-lg sm:text-xl group-hover:scale-110 transition-transform duration-300">🎭</span>
                     Resta creativo anonimo
                 </button>
             </div>
         </div>
 
         <!-- ================= FASE 4: SUCCESS ================= -->
-        <div id="view-success" class="view flex-col items-center text-center w-full hidden py-6">
-            <div class="text-5xl mb-4">✨</div>
-            <h2 class="text-2xl md:text-3xl font-extrabold text-slate-800 mb-3">Missione Compiuta</h2>
-            <p class="text-slate-600 text-base max-w-md mb-6 leading-relaxed">
+        <div id="view-success" class="view flex-col items-center text-center w-full hidden py-4 sm:py-6">
+            <div class="text-4xl sm:text-5xl mb-4">✨</div>
+            <h2 class="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-800 mb-3">Missione Compiuta</h2>
+            <p class="text-slate-600 text-sm sm:text-base max-w-md mb-6 leading-relaxed">
                 Le tue idee sono state salvate in modo sicuro. Ecco l'impatto creativo del team finora:
             </p>
             
             <!-- Dashboard Dati -->
-            <div class="grid grid-cols-3 gap-3 w-full max-w-md mx-auto mb-8 relative" id="dashboardGrid">
-                <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-3 text-center shadow-sm">
-                    <div class="text-3xl font-black text-indigo-600" id="stat-ideas">-</div>
-                    <div class="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase mt-1">Idee Totali</div>
+            <div class="grid grid-cols-3 gap-2 sm:gap-3 w-full max-w-md mx-auto mb-8 relative" id="dashboardGrid">
+                <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-2 sm:p-3 text-center shadow-sm">
+                    <div class="text-2xl sm:text-3xl font-black text-indigo-600" id="stat-ideas">-</div>
+                    <div class="text-[9px] sm:text-[10px] md:text-xs font-semibold text-slate-500 uppercase mt-1">Idee Totali</div>
                 </div>
-                <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-3 text-center shadow-sm">
-                    <div class="text-3xl font-black text-indigo-600" id="stat-users">-</div>
-                    <div class="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase mt-1">Creativi</div>
+                <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-2 sm:p-3 text-center shadow-sm">
+                    <div class="text-2xl sm:text-3xl font-black text-indigo-600" id="stat-users">-</div>
+                    <div class="text-[9px] sm:text-[10px] md:text-xs font-semibold text-slate-500 uppercase mt-1">Creativi</div>
                 </div>
-                <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-3 text-center shadow-sm">
-                    <div class="text-3xl font-black text-indigo-600" id="stat-objects">-</div>
-                    <div class="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase mt-1">Oggetti Usati</div>
+                <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-2 sm:p-3 text-center shadow-sm">
+                    <div class="text-2xl sm:text-3xl font-black text-indigo-600" id="stat-objects">-</div>
+                    <div class="text-[9px] sm:text-[10px] md:text-xs font-semibold text-slate-500 uppercase mt-1">Oggetti Usati</div>
                 </div>
             </div>
 
-            <div id="dynamicQuote" class="quote-font text-lg text-slate-500 italic mb-6 px-4">
+            <div id="dynamicQuote" class="quote-font text-base sm:text-lg text-slate-500 italic mb-6 px-2 sm:px-4">
                 <!-- La citazione verrà generata dinamicamente qui -->
             </div>
 
-            <button onclick="location.reload()" class="font-semibold text-indigo-600 hover:text-indigo-800 transition-colors underline underline-offset-4">
+            <button onclick="location.reload()" class="font-semibold text-sm sm:text-base text-indigo-600 hover:text-indigo-800 transition-colors underline underline-offset-4">
                 Fai un altro tentativo
             </button>
         </div>
@@ -269,8 +272,6 @@
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxsRI94VpOG_c-zdEP7a3k1gBRXkxSSyxAyICH64uZgq04LJW_hA3PzWaokBpNQqbh9/exec"; 
         
         // --- FIX IMMAGINE CORIANDOLI: Usiamo l'Oggetto HTML Image Nativo ---
-        // Passando un oggetto Immagine nativo alla libreria canvas-confetti,
-        // evitiamo il blocco di sicurezza (Tainted Canvas) che causava i quadratini.
         const customRabbitImage = new Image();
         customRabbitImage.src = 'https://raw.githubusercontent.com/EIIS-CTO/creativitygame/cac64d1248ea3d5d08c3e3403acda0f936a8ac1e/rabbit.png';
         // ------------------------------------------------------------------
@@ -312,7 +313,7 @@
         function switchView(viewId) {
             document.querySelectorAll('.view').forEach(v => {
                 v.classList.remove('active');
-                setTimeout(() => v.classList.add('hidden'), 400); 
+                setTimeout(() => v.classList.add('hidden'), 300); 
             });
             const targetView = document.getElementById(viewId);
             targetView.classList.remove('hidden');
@@ -329,10 +330,14 @@
                 reelItems = reelItems.concat(shuffled);
             }
             
+            // Adattamento altezza item a schermo piccolo
+            const isMobile = window.innerWidth < 640;
+            const itemHeight = isMobile ? 80 : 96; // 80px per h-20, 96px per h-24
+            
             reel.innerHTML = reelItems.map(obj => `
-                <div class="h-24 flex items-center justify-center gap-4 w-full">
-                    <span class="text-5xl drop-shadow-md">${obj.emoji}</span>
-                    <span class="text-2xl font-bold text-slate-800 w-48 text-left">${obj.name}</span>
+                <div class="${isMobile ? 'h-20' : 'h-24'} flex items-center justify-center gap-3 sm:gap-4 w-full px-4">
+                    <span class="text-4xl sm:text-5xl drop-shadow-md">${obj.emoji}</span>
+                    <span class="text-xl sm:text-2xl font-bold text-slate-800 w-32 sm:w-48 text-left truncate">${obj.name}</span>
                 </div>
             `).join('');
             
@@ -344,8 +349,7 @@
                 const winnerIndex = reelItems.length - Math.floor(Math.random() * objectsPool.length) - 5;
                 selectedObject = reelItems[winnerIndex];
                 
-                const itemHeight = 96;
-                const targetY = -(winnerIndex * itemHeight) + 32;
+                const targetY = -(winnerIndex * itemHeight) + (itemHeight / 2); // centramento calcolato per varie altezze
                 const duration = 3500; 
                 
                 requestAnimationFrame(() => {
@@ -402,7 +406,6 @@
             }
         }
 
-        // Funzione per intercettare l'easter egg anche se digitato nel form finale
         function checkEasterEggInSuggestion(e) {
             const val = e.target.value.toLowerCase();
             if (!easterEggFound && (val.includes('coniglio') || val.includes('bianconiglio'))) {
@@ -412,7 +415,6 @@
             }
         }
 
-        // Funzione helper per l'animazione dei coriandoli con oggetto Immagine
         function triggerConfetti(durationMs) {
             if (typeof confetti === 'function') {
                 var end = Date.now() + durationMs;
@@ -423,25 +425,23 @@
                     }
                     
                     const config = {
-                        particleCount: 2, // Lanciamo poche particelle per volta
+                        particleCount: 2,
                         spread: 60,
                         shapes: ['image'],
                         shapeOptions: {
                             image: [{ 
-                                src: customRabbitImage, // Usiamo l'oggetto HTML Image nativo!
-                                width: 8,  // Dimensione di calcolo richiesta
+                                src: customRabbitImage,
+                                width: 8, 
                                 height: 8 
                             }]
                         },
-                        scalar: 6, // Moltiplicatore per ingrandire visivamente il coniglio
+                        scalar: 6,
                         zIndex: 9999,
                         gravity: 0.8,
                         ticks: 200
                     };
 
-                    // Lato sinistro
                     confetti(Object.assign({}, config, { angle: 60, origin: { x: 0, y: 0.6 } }));
-                    // Lato destro
                     confetti(Object.assign({}, config, { angle: 120, origin: { x: 1, y: 0.6 } }));
 
                 }, 250);
@@ -488,7 +488,7 @@
             listEl.innerHTML = '';
             userIdeas.forEach((idea, index) => {
                 const li = document.createElement('li');
-                li.className = 'bg-white border border-slate-100 p-3 rounded-lg shadow-sm flex gap-3 animate-fade-in-up';
+                li.className = 'bg-white border border-slate-100 p-2 sm:p-3 rounded-lg shadow-sm flex gap-2 sm:gap-3 animate-fade-in-up text-sm sm:text-base';
                 li.innerHTML = `<span class="font-bold text-indigo-400">${index + 1}.</span> <span class="text-slate-700">${idea}</span>`;
                 listEl.appendChild(li);
             });
@@ -511,7 +511,6 @@
             }
             
             switchView('view-lead');
-            setTimeout(() => document.getElementById('emailInput').focus(), 500);
         }
 
         function sendData(isAnonymous = false) {
@@ -591,11 +590,6 @@
                         document.getElementById('stat-ideas').innerText = "Err";
                         document.getElementById('stat-users').innerText = "Err";
                         document.getElementById('stat-objects').innerText = "Err";
-                        
-                        const errorMsg = document.createElement('div');
-                        errorMsg.className = "absolute -bottom-16 left-0 w-full text-rose-600 text-xs font-semibold p-2 bg-rose-50 rounded-lg border border-rose-200 shadow-sm";
-                        errorMsg.innerHTML = "⚠️ Si è verificato un errore di connessione con Google Sheets.";
-                        document.getElementById('dashboardGrid').appendChild(errorMsg);
                     });
             };
 
