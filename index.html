@@ -116,11 +116,21 @@
         </div>
 
         <!-- ================= FASE 1.5: SPINNER ================= -->
-        <div id="view-spinner" class="view flex-col items-center justify-center w-full py-20">
-            <h2 class="text-2xl font-semibold text-slate-600 mb-8">Estrazione dell'oggetto...</h2>
-            <div class="flex flex-col items-center gap-6">
-                <div id="spinnerEmoji" class="text-8xl spinner-animation drop-shadow-xl">❓</div>
-                <div id="spinnerName" class="text-3xl font-bold text-slate-800 h-10">Preparati</div>
+        <div id="view-spinner" class="view flex-col items-center justify-center w-full py-16">
+            <h2 class="text-2xl font-semibold text-slate-600 mb-8">Estrazione dell'oggetto in corso...</h2>
+            
+            <!-- Slot Machine Container -->
+            <div class="relative h-40 w-full max-w-md mx-auto overflow-hidden bg-white/60 rounded-2xl border border-slate-200 shadow-inner">
+                <!-- Riga centrale di selezione -->
+                <div class="absolute top-1/2 left-0 w-full h-24 -mt-12 border-y-2 border-indigo-400/50 bg-indigo-50/40 z-0 pointer-events-none"></div>
+                
+                <!-- Nastro scorrevole -->
+                <div id="spinnerReel" class="flex flex-col items-center w-full absolute top-0 z-10 will-change-transform">
+                    <!-- Generato via JS -->
+                </div>
+                
+                <!-- Sfumature sopra e sotto -->
+                <div class="absolute inset-0 pointer-events-none shadow-[inset_0_30px_20px_-15px_rgba(255,255,255,1),inset_0_-30px_20px_-15px_rgba(255,255,255,1)] z-20"></div>
             </div>
         </div>
 
@@ -172,44 +182,61 @@
         </div>
 
         <!-- ================= FASE 3: LEAD GEN ================= -->
-        <div id="view-lead" class="view flex-col items-center text-center w-full hidden py-10">
-            <div class="w-20 h-20 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-4xl mb-6 shadow-inner" id="leadIcon">💡</div>
-            <h2 class="text-3xl font-extrabold text-slate-800 mb-3" id="leadTitle">Tempo scaduto!</h2>
-            <p class="text-slate-600 text-lg mb-8 max-w-lg">
-                Hai generato <strong class="text-indigo-600 text-2xl mx-1" id="finalCountMsg">0</strong> idee. Inserisci la tua email lavorativa per salvare il tuo punteggio e scoprire come ti posizioni rispetto al resto del team.
+        <div id="view-lead" class="view flex-col items-center text-center w-full hidden py-4">
+            <div class="w-14 h-14 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-2xl mb-3 shadow-inner" id="leadIcon">💡</div>
+            <h2 class="text-2xl font-extrabold text-slate-800 mb-2" id="leadTitle">Tempo scaduto!</h2>
+            <p class="text-slate-600 text-base mb-5 max-w-lg">
+                Hai registrato <strong class="text-indigo-600 text-xl mx-1" id="finalCountMsg">0</strong> idee. Lascia la tua email per ricevere l'analisi aggregata.
             </p>
             
-            <div class="w-full max-w-md relative mb-8">
+            <div class="w-full max-w-md relative mb-4">
                 <input type="email" id="emailInput" required autocomplete="email"
-                       class="w-full bg-white border-2 border-slate-200 rounded-xl py-4 px-6 text-lg text-center text-slate-800 transition-all focus:border-indigo-400 focus:ring-4 focus:ring-indigo-50 shadow-sm"
+                       class="w-full bg-white border-2 border-slate-200 rounded-xl py-3 px-5 text-base text-center text-slate-800 transition-all focus:border-indigo-400 focus:ring-4 focus:ring-indigo-50 shadow-sm"
                        placeholder="nome.cognome@azienda.it">
+            </div>
+
+            <!-- Campo per suggerire un nuovo oggetto -->
+            <div class="w-full max-w-md relative mb-5 text-left">
+                <label for="suggestObjectInput" class="block text-xs font-semibold text-slate-500 mb-1">Suggerisci un oggetto per il futuro (Opzionale)</label>
+                <input type="text" id="suggestObjectInput"
+                       class="w-full bg-white border-2 border-slate-200 rounded-xl py-2 px-4 text-sm text-slate-700 transition-all focus:border-indigo-400 focus:ring-4 focus:ring-indigo-50 shadow-sm"
+                       placeholder="es. Un imbuto, una gruccia...">
             </div>
             
             <!-- Loader (hidden by default) -->
-            <div id="loadingIndicator" class="hidden flex-col items-center justify-center text-indigo-600 mb-6">
-                <svg class="animate-spin h-8 w-8 mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <div id="loadingIndicator" class="hidden flex-col items-center justify-center text-indigo-600 mb-4">
+                <svg class="animate-spin h-6 w-6 mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle>
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                <span class="font-medium text-sm">Salvataggio dati in corso...</span>
+                <span class="font-medium text-xs">Salvataggio in corso...</span>
             </div>
             
-            <button id="sendDataBtn" onclick="sendData()" 
-                    class="w-full max-w-md px-10 py-4 bg-slate-900 text-white font-bold rounded-xl shadow-lg hover:bg-indigo-600 hover:-translate-y-1 transition-all duration-300 text-lg">
-                Scopri i Risultati
-            </button>
+            <div class="w-full max-w-md flex flex-col gap-3">
+                <button id="sendDataBtn" onclick="sendData()" 
+                        class="w-full px-6 py-3 bg-slate-900 text-white font-bold rounded-xl shadow-lg hover:bg-indigo-600 hover:-translate-y-1 transition-all duration-300 text-base">
+                    Invia e Scopri i Risultati
+                </button>
+
+                <!-- Pulsante per bypassare l'email -->
+                <button id="skipEmailBtn" onclick="sendData(true)" 
+                        class="w-full px-4 py-3 bg-white border-2 border-slate-200 text-slate-600 font-bold rounded-xl shadow-sm hover:bg-slate-50 hover:border-indigo-200 hover:text-indigo-600 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 text-base group">
+                    <span class="text-xl group-hover:scale-110 transition-transform duration-300">🎭</span>
+                    Resta creativo anonimo
+                </button>
+            </div>
         </div>
 
         <!-- ================= FASE 4: SUCCESS ================= -->
-        <div id="view-success" class="view flex-col items-center text-center w-full hidden py-10">
-            <div class="text-6xl mb-6">✨</div>
-            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800 mb-4">Missione Compiuta</h2>
-            <p class="text-slate-600 text-lg max-w-md mb-10 leading-relaxed">
+        <div id="view-success" class="view flex-col items-center text-center w-full hidden py-6">
+            <div class="text-5xl mb-4">✨</div>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-slate-800 mb-3">Missione Compiuta</h2>
+            <p class="text-slate-600 text-base max-w-md mb-6 leading-relaxed">
                 Le tue idee sono state salvate in modo sicuro. Presto condivideremo l'analisi aggregata per vedere quali menti del team mantengono vivo quel famoso "2%".
             </p>
             
-            <div class="quote-font text-xl text-slate-400 italic mb-10">
-                "La creatività è l'intelligenza che si diverte."
+            <div id="dynamicQuote" class="quote-font text-lg text-slate-500 italic mb-6 px-4">
+                <!-- La citazione verrà generata dinamicamente qui -->
             </div>
 
             <button onclick="location.reload()" class="font-semibold text-indigo-600 hover:text-indigo-800 transition-colors underline underline-offset-4">
@@ -221,8 +248,19 @@
 
     <script>
         // ================= CONFIGURATION =================
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyGED8iGczWdTXX96IVevCagHuhIoE4TA2WV4U6WcR2cf5ws12Oc55fwqEkKQ27OA4/exec"; 
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzTWebUhBVPKXtcm1h6MOyy83IMt788nsN-SYRJ8CX64vqmcl3WxVtNbhEla5P2pKT5/exec"; 
         
+        // Citazioni dinamiche
+        const quotesPool = [
+            '"La creatività è l\'intelligenza che si diverte." - Albert Einstein',
+            '"Non puoi esaurire la creatività. Più la usi, più ne hai." - Maya Angelou',
+            '"La logica ti porterà da A a B. L\'immaginazione ti porterà dappertutto." - Albert Einstein',
+            '"Il principale nemico della creatività è il buon senso." - Pablo Picasso',
+            '"La creatività richiede il coraggio di abbandonare le certezze." - Erich Fromm',
+            '"Un\'idea che non è pericolosa è indegna di essere chiamata idea." - Oscar Wilde',
+            '"Per inventare hai bisogno di una buona immaginazione e di una pila di cianfrusaglie." - Thomas Edison'
+        ];
+
         // Oggetti
         const objectsPool = [
             { emoji: '🧱', name: 'un Mattone' },
@@ -259,28 +297,52 @@
         // Phase 1.5: Spin the Wheel
         function startSpinner() {
             switchView('view-spinner');
-            const emojiEl = document.getElementById('spinnerEmoji');
-            const nameEl = document.getElementById('spinnerName');
+            const reel = document.getElementById('spinnerReel');
             
-            let spins = 0;
-            const maxSpins = 20; 
+            // Creiamo un array lungo per simulare il rullo (duplicando e mescolando gli oggetti)
+            let reelItems = [];
+            for (let i = 0; i < 6; i++) {
+                let shuffled = [...objectsPool].sort(() => 0.5 - Math.random());
+                reelItems = reelItems.concat(shuffled);
+            }
             
-            const spinInterval = setInterval(() => {
-                const randomObj = objectsPool[Math.floor(Math.random() * objectsPool.length)];
-                emojiEl.innerText = randomObj.emoji;
-                nameEl.innerText = randomObj.name;
-                spins++;
-
-                if (spins >= maxSpins) {
-                    clearInterval(spinInterval);
-                    selectedObject = randomObj;
-                    nameEl.innerText = randomObj.name;
-                    emojiEl.classList.remove('spinner-animation');
-                    emojiEl.classList.add('scale-125', 'transition-transform', 'duration-500');
-                    
-                    setTimeout(() => startGame(), 1200);
-                }
-            }, 100);
+            // Generiamo l'HTML del rullo (ogni elemento è alto 96px ovvero h-24)
+            reel.innerHTML = reelItems.map(obj => `
+                <div class="h-24 flex items-center justify-center gap-4 w-full">
+                    <span class="text-5xl drop-shadow-md">${obj.emoji}</span>
+                    <span class="text-2xl font-bold text-slate-800 w-48 text-left">${obj.name}</span>
+                </div>
+            `).join('');
+            
+            // Ritardiamo l'animazione per permettere al browser di renderizzare il DOM
+            setTimeout(() => {
+                // Resettiamo la posizione del rullo senza animazione
+                reel.style.transition = 'none';
+                reel.style.transform = `translateY(0px)`;
+                
+                // Forza il reflow per applicare la posizione 0 istantaneamente
+                void reel.offsetHeight; 
+                
+                // Scegliamo un elemento vincente verso la fine dell'array
+                const winnerIndex = reelItems.length - Math.floor(Math.random() * objectsPool.length) - 5;
+                selectedObject = reelItems[winnerIndex];
+                
+                // Calcoliamo la posizione per centrare la vincita
+                const itemHeight = 96;
+                const targetY = -(winnerIndex * itemHeight) + 32;
+                const duration = 3500; // 3.5 secondi
+                
+                // Avviamo l'animazione nel frame successivo per garantire la transizione fluida
+                requestAnimationFrame(() => {
+                    reel.style.transition = `transform ${duration}ms cubic-bezier(0.15, 0.85, 0.15, 1)`;
+                    reel.style.transform = `translateY(${targetY}px)`;
+                });
+                
+                // Passiamo al gioco una volta finito lo spin
+                setTimeout(() => {
+                    startGame();
+                }, duration + 800);
+            }, 100); // 100ms di attesa post-render
         }
 
         // Phase 2: Start Game
@@ -369,20 +431,29 @@
             setTimeout(() => document.getElementById('emailInput').focus(), 500);
         }
 
-        // Phase 3: Send Data
-        function sendData() {
+        // Phase 3: Send Data (now with anonymous support)
+        function sendData(isAnonymous = false) {
             const emailInput = document.getElementById('emailInput');
-            const email = emailInput.value.trim();
+            let email = emailInput.value.trim();
             
-            if(!email || !email.includes('@')) {
-                emailInput.classList.add('border-rose-500', 'ring-rose-100');
-                setTimeout(() => emailInput.classList.remove('border-rose-500', 'ring-rose-100'), 1500);
-                return;
+            if (isAnonymous) {
+                email = "Anonimo";
+            } else {
+                if(!email || !email.includes('@')) {
+                    emailInput.classList.add('border-rose-500', 'ring-rose-100');
+                    setTimeout(() => emailInput.classList.remove('border-rose-500', 'ring-rose-100'), 1500);
+                    return;
+                }
             }
 
+            // Nascondi pulsanti e mostra loader
             document.getElementById('sendDataBtn').classList.add('hidden');
+            const skipBtn = document.getElementById('skipEmailBtn');
+            if (skipBtn) skipBtn.classList.add('hidden');
             document.getElementById('loadingIndicator').classList.remove('hidden');
             document.getElementById('loadingIndicator').classList.add('flex');
+
+            const suggestedObject = document.getElementById('suggestObjectInput')?.value.trim() || "";
 
             const combinedIdeas = userIdeas.length > 0 
                                 ? userIdeas.map((idea, i) => `${i+1}) ${idea}`).join(" \n ")
@@ -393,6 +464,14 @@
             formData.append("oggetto", selectedObject.name);
             formData.append("idee", combinedIdeas); 
             formData.append("num_idee", userIdeas.length.toString()); 
+            formData.append("suggested_object", suggestedObject);
+
+            // Funzione per mostrare la schermata finale con citazione random
+            const showSuccessScreen = () => {
+                const randomQuote = quotesPool[Math.floor(Math.random() * quotesPool.length)];
+                document.getElementById('dynamicQuote').innerText = randomQuote;
+                switchView('view-success');
+            };
 
             fetch(SCRIPT_URL, {
                 method: "POST",
@@ -400,10 +479,10 @@
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: formData.toString()
             })
-            .then(() => switchView('view-success'))
+            .then(() => showSuccessScreen())
             .catch(error => {
                 console.error("Errore di rete:", error);
-                switchView('view-success');
+                showSuccessScreen();
             });
         }
     </script>
