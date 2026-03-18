@@ -6,6 +6,8 @@
     <title>Creativity Game | Scopri il tuo potenziale</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <!-- Libreria per l'effetto coriandoli aggiornata (v1.9.2 supporta le immagini) -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
     <style>
         body {
             font-family: 'Outfit', sans-serif;
@@ -68,7 +70,7 @@
 
     <main class="glass-card rounded-3xl p-8 md:p-12 w-full max-w-3xl flex flex-col relative max-h-[95vh] overflow-y-auto">
         
-        <!-- ================= FASE 1: INTRO (La storia della NASA) ================= -->
+        <!-- ================= FASE 1: INTRO ================= -->
         <div id="view-intro" class="view active flex-col w-full">
             
             <div class="text-center mb-8">
@@ -119,17 +121,9 @@
         <div id="view-spinner" class="view flex-col items-center justify-center w-full py-16">
             <h2 class="text-2xl font-semibold text-slate-600 mb-8">Estrazione dell'oggetto in corso...</h2>
             
-            <!-- Slot Machine Container -->
             <div class="relative h-40 w-full max-w-md mx-auto overflow-hidden bg-white/60 rounded-2xl border border-slate-200 shadow-inner">
-                <!-- Riga centrale di selezione -->
                 <div class="absolute top-1/2 left-0 w-full h-24 -mt-12 border-y-2 border-indigo-400/50 bg-indigo-50/40 z-0 pointer-events-none"></div>
-                
-                <!-- Nastro scorrevole -->
-                <div id="spinnerReel" class="flex flex-col items-center w-full absolute top-0 z-10 will-change-transform">
-                    <!-- Generato via JS -->
-                </div>
-                
-                <!-- Sfumature sopra e sotto -->
+                <div id="spinnerReel" class="flex flex-col items-center w-full absolute top-0 z-10 will-change-transform"></div>
                 <div class="absolute inset-0 pointer-events-none shadow-[inset_0_30px_20px_-15px_rgba(255,255,255,1),inset_0_-30px_20px_-15px_rgba(255,255,255,1)] z-20"></div>
             </div>
         </div>
@@ -151,7 +145,6 @@
                 </div>
             </div>
             
-            <!-- Input Idea -->
             <div class="w-full relative flex gap-3 mb-6">
                 <input type="text" id="ideaInput" maxlength="140" autocomplete="off"
                        class="flex-1 bg-white border-2 border-slate-200 focus:border-indigo-400 rounded-xl py-4 px-6 text-lg text-slate-700 transition-all placeholder:text-slate-300 shadow-sm"
@@ -161,7 +154,6 @@
                 </button>
             </div>
             
-            <!-- List of Ideas -->
             <div class="w-full flex-1 bg-white border border-slate-100 shadow-inner rounded-xl p-6 h-64 overflow-y-auto ideas-container mb-6">
                 <div class="flex justify-between items-center mb-4 border-b border-slate-100 pb-2">
                     <span class="font-bold text-slate-700">Le tue idee</span>
@@ -181,6 +173,18 @@
             </div>
         </div>
 
+        <!-- ================= FASE 2.5: EASTER EGG ================= -->
+        <div id="view-easter-egg" class="view flex-col items-center justify-center text-center w-full hidden py-10">
+            <div class="text-8xl mb-6 animate-bounce drop-shadow-lg">🐇</div>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-indigo-600 mb-4">Hai scoperto il Bianconiglio!</h2>
+            <p class="text-slate-600 text-lg max-w-md mb-8 leading-relaxed">
+                Hai sbloccato l'easter egg segreto del gioco. La tua curiosità e il tuo pensiero divergente sono stati registrati a sistema. Ora scendiamo nella tana...
+            </p>
+            <button onclick="resumeGame()" class="px-8 py-4 bg-indigo-600 text-white font-bold rounded-xl shadow-lg hover:bg-indigo-700 hover:-translate-y-1 transition-all duration-300 text-lg">
+                Riprendi il timer e torna alla Sfida
+            </button>
+        </div>
+
         <!-- ================= FASE 3: LEAD GEN ================= -->
         <div id="view-lead" class="view flex-col items-center text-center w-full hidden py-4">
             <div class="w-14 h-14 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-2xl mb-3 shadow-inner" id="leadIcon">💡</div>
@@ -198,12 +202,11 @@
             <!-- Campo per suggerire un nuovo oggetto -->
             <div class="w-full max-w-md relative mb-5 text-left">
                 <label for="suggestObjectInput" class="block text-xs font-semibold text-slate-500 mb-1">Suggerisci un oggetto per il futuro (Opzionale)</label>
-                <input type="text" id="suggestObjectInput"
+                <input type="text" id="suggestObjectInput" oninput="checkEasterEggInSuggestion(event)"
                        class="w-full bg-white border-2 border-slate-200 rounded-xl py-2 px-4 text-sm text-slate-700 transition-all focus:border-indigo-400 focus:ring-4 focus:ring-indigo-50 shadow-sm"
                        placeholder="es. Un imbuto, una gruccia...">
             </div>
             
-            <!-- Loader (hidden by default) -->
             <div id="loadingIndicator" class="hidden flex-col items-center justify-center text-indigo-600 mb-4">
                 <svg class="animate-spin h-6 w-6 mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle>
@@ -218,7 +221,6 @@
                     Invia e Scopri i Risultati
                 </button>
 
-                <!-- Pulsante per bypassare l'email -->
                 <button id="skipEmailBtn" onclick="sendData(true)" 
                         class="w-full px-4 py-3 bg-white border-2 border-slate-200 text-slate-600 font-bold rounded-xl shadow-sm hover:bg-slate-50 hover:border-indigo-200 hover:text-indigo-600 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 text-base group">
                     <span class="text-xl group-hover:scale-110 transition-transform duration-300">🎭</span>
@@ -232,9 +234,25 @@
             <div class="text-5xl mb-4">✨</div>
             <h2 class="text-2xl md:text-3xl font-extrabold text-slate-800 mb-3">Missione Compiuta</h2>
             <p class="text-slate-600 text-base max-w-md mb-6 leading-relaxed">
-                Le tue idee sono state salvate in modo sicuro. Presto condivideremo l'analisi aggregata per vedere quali menti del team mantengono vivo quel famoso "2%".
+                Le tue idee sono state salvate in modo sicuro. Ecco l'impatto creativo del team finora:
             </p>
             
+            <!-- Dashboard Dati -->
+            <div class="grid grid-cols-3 gap-3 w-full max-w-md mx-auto mb-8 relative" id="dashboardGrid">
+                <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-3 text-center shadow-sm">
+                    <div class="text-3xl font-black text-indigo-600" id="stat-ideas">-</div>
+                    <div class="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase mt-1">Idee Totali</div>
+                </div>
+                <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-3 text-center shadow-sm">
+                    <div class="text-3xl font-black text-indigo-600" id="stat-users">-</div>
+                    <div class="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase mt-1">Creativi</div>
+                </div>
+                <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-3 text-center shadow-sm">
+                    <div class="text-3xl font-black text-indigo-600" id="stat-objects">-</div>
+                    <div class="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase mt-1">Oggetti Usati</div>
+                </div>
+            </div>
+
             <div id="dynamicQuote" class="quote-font text-lg text-slate-500 italic mb-6 px-4">
                 <!-- La citazione verrà generata dinamicamente qui -->
             </div>
@@ -248,8 +266,26 @@
 
     <script>
         // ================= CONFIGURATION =================
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzTWebUhBVPKXtcm1h6MOyy83IMt788nsN-SYRJ8CX64vqmcl3WxVtNbhEla5P2pKT5/exec"; 
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxsRI94VpOG_c-zdEP7a3k1gBRXkxSSyxAyICH64uZgq04LJW_hA3PzWaokBpNQqbh9/exec"; 
         
+        // --- FIX IMMAGINE CORIANDOLI: Convertiamo l'immagine in Base64 sul client ---
+        // Questo previene completamente i blocchi di sicurezza (CORS) che generano i "quadrati colorati"
+        const rabbitImgSrc = 'https://raw.githubusercontent.com/EIIS-CTO/creativitygame/cac64d1248ea3d5d08c3e3403acda0f936a8ac1e/rabbit.png';
+        let rabbitDataUrl = rabbitImgSrc; // Default
+        
+        const img = new Image();
+        img.crossOrigin = 'Anonymous';
+        img.onload = function() {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.width || 100;
+            canvas.height = img.height || 100;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+            rabbitDataUrl = canvas.toDataURL('image/png'); // Stringa dati sicura per il canvas-confetti
+        };
+        img.src = rabbitImgSrc;
+        // ------------------------------------------------------------------
+
         // Citazioni dinamiche
         const quotesPool = [
             '"La creatività è l\'intelligenza che si diverte." - Albert Einstein',
@@ -282,8 +318,8 @@
         let timeLeft = 90;
         let timerInterval;
         let userIdeas = [];
+        let easterEggFound = false;
 
-        // View Switcher
         function switchView(viewId) {
             document.querySelectorAll('.view').forEach(v => {
                 v.classList.remove('active');
@@ -294,19 +330,16 @@
             setTimeout(() => targetView.classList.add('active'), 50);
         }
 
-        // Phase 1.5: Spin the Wheel
         function startSpinner() {
             switchView('view-spinner');
             const reel = document.getElementById('spinnerReel');
             
-            // Creiamo un array lungo per simulare il rullo (duplicando e mescolando gli oggetti)
             let reelItems = [];
             for (let i = 0; i < 6; i++) {
                 let shuffled = [...objectsPool].sort(() => 0.5 - Math.random());
                 reelItems = reelItems.concat(shuffled);
             }
             
-            // Generiamo l'HTML del rullo (ogni elemento è alto 96px ovvero h-24)
             reel.innerHTML = reelItems.map(obj => `
                 <div class="h-24 flex items-center justify-center gap-4 w-full">
                     <span class="text-5xl drop-shadow-md">${obj.emoji}</span>
@@ -314,44 +347,39 @@
                 </div>
             `).join('');
             
-            // Ritardiamo l'animazione per permettere al browser di renderizzare il DOM
             setTimeout(() => {
-                // Resettiamo la posizione del rullo senza animazione
                 reel.style.transition = 'none';
                 reel.style.transform = `translateY(0px)`;
-                
-                // Forza il reflow per applicare la posizione 0 istantaneamente
                 void reel.offsetHeight; 
                 
-                // Scegliamo un elemento vincente verso la fine dell'array
                 const winnerIndex = reelItems.length - Math.floor(Math.random() * objectsPool.length) - 5;
                 selectedObject = reelItems[winnerIndex];
                 
-                // Calcoliamo la posizione per centrare la vincita
                 const itemHeight = 96;
                 const targetY = -(winnerIndex * itemHeight) + 32;
-                const duration = 3500; // 3.5 secondi
+                const duration = 3500; 
                 
-                // Avviamo l'animazione nel frame successivo per garantire la transizione fluida
                 requestAnimationFrame(() => {
                     reel.style.transition = `transform ${duration}ms cubic-bezier(0.15, 0.85, 0.15, 1)`;
                     reel.style.transform = `translateY(${targetY}px)`;
                 });
                 
-                // Passiamo al gioco una volta finito lo spin
                 setTimeout(() => {
                     startGame();
                 }, duration + 800);
-            }, 100); // 100ms di attesa post-render
+            }, 100); 
         }
 
-        // Phase 2: Start Game
         function startGame() {
             document.getElementById('gameEmoji').innerText = selectedObject.emoji;
             document.getElementById('gameObjectName').innerText = selectedObject.name;
             switchView('view-game');
             document.getElementById('ideaInput').focus();
             
+            startTimerLogic();
+        }
+
+        function startTimerLogic() {
             timerInterval = setInterval(() => {
                 timeLeft--;
                 const display = document.getElementById('timerDisplay');
@@ -368,7 +396,16 @@
             }, 1000);
         }
 
-        // Handle Enter Key
+        function resumeGame() {
+            if (userIdeas.length >= 10) {
+                finishGame(true);
+                return;
+            }
+            switchView('view-game');
+            document.getElementById('ideaInput').focus();
+            startTimerLogic();
+        }
+
         function handleKeyPress(e) {
             if (e.key === 'Enter') {
                 e.preventDefault();
@@ -376,23 +413,84 @@
             }
         }
 
-        // Add Idea to list
+        // Funzione per intercettare l'easter egg anche se digitato nel form finale
+        function checkEasterEggInSuggestion(e) {
+            const val = e.target.value.toLowerCase();
+            if (!easterEggFound && (val.includes('coniglio') || val.includes('bianconiglio'))) {
+                easterEggFound = true;
+                triggerConfetti(3000);
+                alert("🐰 Hai trovato il Bianconiglio anche qui nella schermata finale!");
+            }
+        }
+
+        // Funzione helper per l'animazione dei coriandoli con immagine personalizzata IN BASE64
+        function triggerConfetti(durationMs) {
+            if (typeof confetti === 'function') {
+                var end = Date.now() + durationMs;
+                
+                var interval = setInterval(function() {
+                    if (Date.now() > end) {
+                        return clearInterval(interval);
+                    }
+                    
+                    // Configurazione particelle
+                    const config = {
+                        particleCount: 2, // Lanciamo poche particelle per volta
+                        spread: 60,
+                        shapes: ['image'],
+                        shapeOptions: {
+                            image: [{ 
+                                src: rabbitDataUrl, // Ora è una stringa base64 sicura
+                                width: 32,          // Proporzione di calcolo interna
+                                height: 32          // Proporzione di calcolo interna
+                            }]
+                        },
+                        scalar: 3, // Ingrandisce visivamente l'immagine
+                        zIndex: 9999,
+                        gravity: 0.8,
+                        ticks: 200
+                    };
+
+                    // Lato sinistro
+                    confetti(Object.assign({}, config, { angle: 60, origin: { x: 0, y: 0.6 } }));
+                    // Lato destro
+                    confetti(Object.assign({}, config, { angle: 120, origin: { x: 1, y: 0.6 } }));
+
+                }, 250);
+            }
+        }
+
         function addIdea() {
             const inputEl = document.getElementById('ideaInput');
             const idea = inputEl.value.trim();
             
             if (idea && userIdeas.length < 10) {
+                // EASTER EGG CHECK SULLE IDEE
+                const lowerIdea = idea.toLowerCase();
+                if (!easterEggFound && (lowerIdea.includes('coniglio') || lowerIdea.includes('bianconiglio'))) {
+                    easterEggFound = true;
+                    
+                    clearInterval(timerInterval);
+                    triggerConfetti(3000); // Lancia i Bianconigli!
+                    
+                    userIdeas.push(idea);
+                    inputEl.value = '';
+                    renderIdeasList();
+                    
+                    switchView('view-easter-egg');
+                    return; 
+                }
+
                 userIdeas.push(idea);
                 inputEl.value = '';
                 renderIdeasList();
                 
                 if (userIdeas.length >= 10) {
-                    finishGame(true); // Reached 10 ideas max
+                    finishGame(true);
                 }
             }
         }
 
-        // Update DOM List
         function renderIdeasList() {
             const listEl = document.getElementById('ideasList');
             const countEl = document.getElementById('ideaCount');
@@ -410,14 +508,12 @@
             
             countEl.innerText = `${userIdeas.length} / 10`;
             
-            // Auto-scroll to bottom
             const container = document.querySelector('.ideas-container');
             container.scrollTop = container.scrollHeight;
         }
 
         function finishGameEarly() { finishGame(false); }
 
-        // Finish Game wrapper
         function finishGame(maxReached) {
             clearInterval(timerInterval);
             document.getElementById('finalCountMsg').innerText = userIdeas.length;
@@ -431,7 +527,6 @@
             setTimeout(() => document.getElementById('emailInput').focus(), 500);
         }
 
-        // Phase 3: Send Data (now with anonymous support)
         function sendData(isAnonymous = false) {
             const emailInput = document.getElementById('emailInput');
             let email = emailInput.value.trim();
@@ -446,7 +541,6 @@
                 }
             }
 
-            // Nascondi pulsanti e mostra loader
             document.getElementById('sendDataBtn').classList.add('hidden');
             const skipBtn = document.getElementById('skipEmailBtn');
             if (skipBtn) skipBtn.classList.add('hidden');
@@ -465,12 +559,58 @@
             formData.append("idee", combinedIdeas); 
             formData.append("num_idee", userIdeas.length.toString()); 
             formData.append("suggested_object", suggestedObject);
+            formData.append("easter_egg", easterEggFound ? "Sì" : "No");
 
-            // Funzione per mostrare la schermata finale con citazione random
+            const animateValue = (id, start, end, duration) => {
+                const obj = document.getElementById(id);
+                if (!obj) return;
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    obj.innerHTML = Math.floor(progress * (end - start) + start);
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    } else {
+                        obj.innerHTML = end; 
+                    }
+                };
+                window.requestAnimationFrame(step);
+            };
+
             const showSuccessScreen = () => {
                 const randomQuote = quotesPool[Math.floor(Math.random() * quotesPool.length)];
                 document.getElementById('dynamicQuote').innerText = randomQuote;
                 switchView('view-success');
+
+                const getUrl = SCRIPT_URL + "?action=getStats&t=" + new Date().getTime();
+
+                // FIX CORS: Rimossi gli header custom, ora fetch fa una richiesta semplice consentita
+                fetch(getUrl)
+                    .then(response => {
+                        if (!response.ok) throw new Error("Errore risposta di rete");
+                        return response.json();
+                    })
+                    .then(data => {
+                        animateValue('stat-ideas', 0, data.totalIdeas || 0, 2000);
+                        animateValue('stat-users', 0, data.totalParticipants || 0, 2000);
+                        animateValue('stat-objects', 0, data.totalObjects || 0, 2000);
+                        
+                        if (typeof confetti === 'function' && !easterEggFound) {
+                            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Errore fetch dashboard reale:", error);
+                        document.getElementById('stat-ideas').innerText = "Err";
+                        document.getElementById('stat-users').innerText = "Err";
+                        document.getElementById('stat-objects').innerText = "Err";
+                        
+                        const errorMsg = document.createElement('div');
+                        errorMsg.className = "absolute -bottom-16 left-0 w-full text-rose-600 text-xs font-semibold p-2 bg-rose-50 rounded-lg border border-rose-200 shadow-sm";
+                        errorMsg.innerHTML = "⚠️ Si è verificato un errore di connessione con Google Sheets.";
+                        document.getElementById('dashboardGrid').appendChild(errorMsg);
+                    });
             };
 
             fetch(SCRIPT_URL, {
@@ -479,9 +619,11 @@
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: formData.toString()
             })
-            .then(() => showSuccessScreen())
+            .then(() => {
+                setTimeout(() => showSuccessScreen(), 1500);
+            })
             .catch(error => {
-                console.error("Errore di rete:", error);
+                console.error("Errore di rete invio dati:", error);
                 showSuccessScreen();
             });
         }
