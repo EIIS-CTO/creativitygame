@@ -268,22 +268,11 @@
         // ================= CONFIGURATION =================
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxsRI94VpOG_c-zdEP7a3k1gBRXkxSSyxAyICH64uZgq04LJW_hA3PzWaokBpNQqbh9/exec"; 
         
-        // --- FIX IMMAGINE CORIANDOLI: Convertiamo l'immagine in Base64 sul client ---
-        // Questo previene completamente i blocchi di sicurezza (CORS) che generano i "quadrati colorati"
-        const rabbitImgSrc = 'https://raw.githubusercontent.com/EIIS-CTO/creativitygame/cac64d1248ea3d5d08c3e3403acda0f936a8ac1e/rabbit.png';
-        let rabbitDataUrl = rabbitImgSrc; // Default
-        
-        const img = new Image();
-        img.crossOrigin = 'Anonymous';
-        img.onload = function() {
-            const canvas = document.createElement('canvas');
-            canvas.width = img.width || 100;
-            canvas.height = img.height || 100;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0);
-            rabbitDataUrl = canvas.toDataURL('image/png'); // Stringa dati sicura per il canvas-confetti
-        };
-        img.src = rabbitImgSrc;
+        // --- FIX IMMAGINE CORIANDOLI: Usiamo l'Oggetto HTML Image Nativo ---
+        // Passando un oggetto Immagine nativo alla libreria canvas-confetti,
+        // evitiamo il blocco di sicurezza (Tainted Canvas) che causava i quadratini.
+        const customRabbitImage = new Image();
+        customRabbitImage.src = 'https://raw.githubusercontent.com/EIIS-CTO/creativitygame/cac64d1248ea3d5d08c3e3403acda0f936a8ac1e/rabbit.png';
         // ------------------------------------------------------------------
 
         // Citazioni dinamiche
@@ -423,7 +412,7 @@
             }
         }
 
-        // Funzione helper per l'animazione dei coriandoli con immagine personalizzata IN BASE64
+        // Funzione helper per l'animazione dei coriandoli con oggetto Immagine
         function triggerConfetti(durationMs) {
             if (typeof confetti === 'function') {
                 var end = Date.now() + durationMs;
@@ -433,19 +422,18 @@
                         return clearInterval(interval);
                     }
                     
-                    // Configurazione particelle
                     const config = {
                         particleCount: 2, // Lanciamo poche particelle per volta
                         spread: 60,
                         shapes: ['image'],
                         shapeOptions: {
                             image: [{ 
-                                src: rabbitDataUrl, // Ora è una stringa base64 sicura
-                                width: 32,          // Proporzione di calcolo interna
-                                height: 32          // Proporzione di calcolo interna
+                                src: customRabbitImage, // Usiamo l'oggetto HTML Image nativo!
+                                width: 8,  // Dimensione di calcolo richiesta
+                                height: 8 
                             }]
                         },
-                        scalar: 3, // Ingrandisce visivamente l'immagine
+                        scalar: 6, // Moltiplicatore per ingrandire visivamente il coniglio
                         zIndex: 9999,
                         gravity: 0.8,
                         ticks: 200
@@ -465,13 +453,12 @@
             const idea = inputEl.value.trim();
             
             if (idea && userIdeas.length < 10) {
-                // EASTER EGG CHECK SULLE IDEE
                 const lowerIdea = idea.toLowerCase();
                 if (!easterEggFound && (lowerIdea.includes('coniglio') || lowerIdea.includes('bianconiglio'))) {
                     easterEggFound = true;
                     
                     clearInterval(timerInterval);
-                    triggerConfetti(3000); // Lancia i Bianconigli!
+                    triggerConfetti(3000);
                     
                     userIdeas.push(idea);
                     inputEl.value = '';
@@ -585,7 +572,6 @@
 
                 const getUrl = SCRIPT_URL + "?action=getStats&t=" + new Date().getTime();
 
-                // FIX CORS: Rimossi gli header custom, ora fetch fa una richiesta semplice consentita
                 fetch(getUrl)
                     .then(response => {
                         if (!response.ok) throw new Error("Errore risposta di rete");
